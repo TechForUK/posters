@@ -1,7 +1,8 @@
 runtime: php55
 api_version: 1
 threadsafe: true
-
+includes:
+  - creds.yaml
 handlers:
 - url: /.*
   script: backend/render.php

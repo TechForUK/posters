@@ -1,5 +1,4 @@
 <?php
-
 use setasign\Fpdi\Fpdi;
 
 require_once(dirname(__FILE__) . '/libraries/fpdf/fpdf.php'); 
@@ -14,17 +13,8 @@ if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
 	die();
 }
 $city = substr($city, 1, -4);
-$headers = "accept: */*\r\n" .
-    "Refer: https://bestforbritain.org/\r\n";
 
-$context = [
-    'http' => [
-        'method' => 'GET',
-        'header' => $headers,
-        'content' => http_build_query($data),
-    ]
-];
-$output = file_get_contents("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=".urlencode($city).",%20UK&inputtype=textquery&fields=name&key=AIzaSyBB3wZ4G6IoT7PM6ze4lXu50QriGJmSqvg");
+$output = file_get_contents("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=".urlencode($city).",%20UK&inputtype=textquery&fields=name&key=".getenv('GOOGLE_MAPS_SERVER_KEY'));
 
 if(strlen($output)<10){
 	header("HTTP/1.0 404 Not Found");

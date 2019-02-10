@@ -1,0 +1,2 @@
+env_variables:
+  GOOGLE_MAPS_KEY: '123456789abcdef...'
