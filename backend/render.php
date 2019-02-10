@@ -1,8 +1,8 @@
 <?php
 use setasign\Fpdi\Fpdi;
 
-require_once(dirname(dirname(__FILE__)) . '/libraries/fpdf/fpdf.php'); 
-require_once(dirname(dirname(__FILE__)) . '/libraries/fpdi/src/autoload.php');
+require_once(dirname(__FILE__) . '/libraries/fpdf/fpdf.php'); 
+require_once(dirname(__FILE__) . '/libraries/fpdi/src/autoload.php');
 
 // initiate FPDI
 $pdf = new Fpdi();
