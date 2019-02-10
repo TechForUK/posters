@@ -14,7 +14,20 @@ if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
 	die();
 }
 $city = substr($city, 1, -4);
+$output = file_get_contents("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=".urlencode($city).",%20UK&inputtype=textquery&fields=name&key=AIzaSyBB3wZ4G6IoT7PM6ze4lXu50QriGJmSqvg");
 
+if(strlen($output)<10){
+	header("HTTP/1.0 404 Not Found");
+	echo "Not found.\n";
+	die();
+}
+
+$check = json_decode($output);
+if((!isset($check)) || (!isset($check->status)) || ($check->status != 'OK')){
+	header("HTTP/1.0 404 Not Found");
+	echo "Not found.\n";
+	die();
+}
 $city = str_replace('-',' - ', $city);
 $isLongName = strlen($city) > 9;
 $templateName = $isLongName ? '/templatebig.pdf' : '/template.pdf';
@@ -35,7 +48,7 @@ $pdf->AddFont('PermanentMarker','','PermanentMarker-Regular.php');
 $pdf->SetFont('PermanentMarker', '', 80);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetXY(100, 20);
-$pdf->Write(30, urldecode($city));
+$pdf->Write(30, strtoupper($city));
 
 $pdf->Output('D','LoveEU-poster.pdf');
 ?>
