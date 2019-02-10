@@ -1,8 +1,18 @@
 <?php
+
 use setasign\Fpdi\Fpdi;
 
 require_once(dirname(__FILE__) . '/libraries/fpdf/fpdf.php'); 
 require_once(dirname(__FILE__) . '/libraries/fpdi/src/autoload.php');
+
+$city = urldecode($_SERVER['REQUEST_URI']);
+
+// Check city
+if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
+	header("HTTP/1.0 404 Not Found");
+	echo "Not found.\n";
+	die();
+}
 
 // initiate FPDI
 $pdf = new Fpdi();
@@ -20,7 +30,7 @@ $pdf->AddFont('PermanentMarker','','PermanentMarker-Regular.php');
 $pdf->SetFont('PermanentMarker', '', 80);
 $pdf->SetTextColor(0, 0, 0);
 $pdf->SetXY(100, 25);
-$pdf->Write(20, urldecode($_SERVER['QUERY_STRING']));
+$pdf->Write(20, urldecode($city));
 
 $pdf->Output('D','LoveEU-poster.pdf');
 ?>
