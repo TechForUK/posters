@@ -13,6 +13,7 @@ if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
 	echo "Not found.\n";
 	die();
 }
+$city = substr($city, 1, -4);
 
 // initiate FPDI
 $pdf = new Fpdi();
