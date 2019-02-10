@@ -2,11 +2,11 @@
 <html>
   <head>
     <title>#LoveEU</title>
-    <!-- fontawesome-->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto:100" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto:300" rel="stylesheet" crossorigin="anonymous">
+    <meta name="viewport" content="width=440,initial-scale=0.73,min-scale=0.73,max-scale=0.73,user-scalable=no">
     <meta charset="utf-8">
     <style>
       html, body {
@@ -30,16 +30,17 @@
       h1 {
         font-family: 'Permanent Marker', cursive;
         font-size: 80px;
+        margin-bottom: 10px;
       }
       h2 {
-        font-weight: 100;
-        color: gray;
+        font-weight: 300;
+        color: #5d5d5d;
         margin-bottom: 40px;
       }
       input {
         font-family: 'Roboto', Arial, Sans;
         font-size: 30px;
-        width: 360px;
+        width: 300px;
         height: 40px;
         padding: 5px;
         border-radius: 4px;
@@ -65,25 +66,30 @@
       #locateMe:hover {
         opacity: 1;
       }
-
+      #container {
+        width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      @media only screen and (max-height: 640px) {
+        html {
+          background-position: bottom -100px right 0;
+        }
+      }
     </style>
   </head>
   <body>
+    <div id="container">
       <h1>#LoveEU</h1>
-      <h2>Download your poster to put in a window and show you love your town, you love the UK, and you love the EU!</h2>
-  <input id="userInput" type="text" placeholder="Where are you?" autofocus> <a id="locateMe" href="#"><i class="fas fa-location-arrow"></i></a>
-  <div id="result" style="display: none;">
-    <a href="#" id="downloadLink"><i class="fas fa-file-pdf"></i> Download Your <span id="townName"></span> Poster Now!</a><br>
-  </div>
+      <h2>Download your poster and put in your window to show you love your town, you love the UK, and you love the EU!</h2>
+      <input id="userInput" type="text" placeholder="Where are you?" autofocus> <a id="locateMe" href="#"><i class="fas fa-location-arrow"></i></a>
+      <div id="result" style="display: none;">
+        <a href="#" id="downloadLink"><i class="fas fa-file-pdf"></i> Download Your <span id="townName"></span> Poster Now!</a><br>
+      </div>
+    </div>
   <script type="text/javascript">
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-      
       var autocomplete;
-      
       function initMap() {
-
         var options = {
           types: ['geocode'],
           componentRestrictions: {country: 'gb'}
@@ -146,8 +152,6 @@
         $('#downloadLink').attr('href', 'https://brexit-231311.appspot.com/'+encodeURIComponent(city)+'.pdf');
         $('#result').slideDown();
       }
-      // Bias the autocomplete object to the user's geographical location,
-      // as supplied by the browser's 'navigator.geolocation' object.
       function geolocate() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
