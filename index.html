@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>#LoveNotLeave</title>
+    <!-- fontawesome-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto:100" rel="stylesheet">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        font-family: 'Roboto', Arial, Sans;
+        margin: 0;
+        padding: 0;
+        padding-top: 50px;
+        text-align: center;
+      }
+      h1, h2 {
+        width: 410px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h1 {
+        font-family: 'Permanent Marker', cursive;
+        font-size: 50px;
+      }
+      h2 {
+        font-weight: 100;
+        color: gray;
+        margin-bottom: 40px;
+      }
+      input {
+        font-family: 'Roboto', Arial, Sans;
+        font-size: 30px;
+        width: 380px;
+        height: 40px;
+        padding: 5px;
+        border-radius: 4px;
+        border: 1px solid #f7f7f7;
+      }
+      a {
+        text-decoration: none;
+        color: black;
+      }
+      #result {
+        padding-top: 30px;
+        font-size: 24px;
+      }
+      #result i {
+        margin-right: 6px;
+        color: red;
+      }
+      #locateMe {
+        margin-left: 6px;
+        font-size: 30px;
+        opacity: 0.6;
+      }
+      #locateMe:hover {
+        opacity: 1;
+      }
+
+    </style>
+  </head>
+  <body>
+      <h1>#LoveNotLeave</h1>
+      <h2>Download your poster to put in a window and show you love your town, you love the UK, and you love the EU!</h2>
+  <input id="userInput" type="text" placeholder="Where are you?" autofocus> <a id="locateMe" href="#"><i class="fas fa-location-arrow"></i></a>
+  <div id="result" style="display: none;">
+    <a href="#" id="downloadLink"><i class="fas fa-file-pdf"></i> Download Your <span id="townName"></span> Poster Now!</a><br>
+  </div>
+  <script type="text/javascript">
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      
+      var autocomplete;
+      
+      function initMap() {
+
+        var options = {
+          types: ['geocode'],
+          componentRestrictions: {country: 'gb'}
+        };
+
+        autocomplete = new google.maps.places.Autocomplete(document.getElementById('userInput'), options);
+        autocomplete.setFields(['address_components','geometry']);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          console.log(place);
+          for (var i = 0; i < place.address_components.length; i++) {
+            for (var j = 0; j < place.address_components[i].types.length; j++) {
+              if (place.address_components[i].types[j] == 'postal_town'){
+                showResult(place.address_components[i].long_name);
+              }
+            }
+          }
+        });
+      }
+      function showResult(city){
+        $('#userInput').val(city);
+        $('#townName').html(city);
+        $('#downloadLink').attr('href', '/posters/'+string_to_slug(city)+'.pdf');
+        $('#result').slideDown();
+      }
+      function string_to_slug (str) {
+          str = str.replace(/^\s+|\s+$/g, ''); // trim
+          str = str.toLowerCase();
+        
+          // remove accents, swap ñ for n, etc
+          var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+          var to   = "aaaaeeeeiiiioooouuuunc------";
+          for (var i=0, l=from.length ; i<l ; i++) {
+              str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+          }
+
+          str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+              .replace(/\s+/g, '-') // collapse whitespace and replace by -
+              .replace(/-+/g, '-'); // collapse dashes
+
+          return str;
+      }
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=&result_type=postal_town", function( data ) {
+              console.log(data);
+              if((!data.results)||(data.results.length<1)){
+                alert("Sorry, we could not locate you.");
+              } else {
+                var place = data.results[0];
+                console.log(place);
+                var inuk = false;
+                for (var i = 0; i < place.address_components.length; i++) {
+                  for (var j = 0; j < place.address_components[i].types.length; j++) {
+                    if ((place.address_components[i].types[j] == 'country')&&(place.address_components[i].short_name == 'GB')){
+                      inuk = true;
+                    }
+                  }
+                }
+                if(inuk){
+                  for (var i = 0; i < place.address_components.length; i++) {
+                    for (var j = 0; j < place.address_components[i].types.length; j++) {
+                      if (place.address_components[i].types[j] == 'postal_town'){
+                        showResult(place.address_components[i].long_name);
+                      }
+                    }
+                  }
+                } else {
+                  alert('Sorry, this only works for people in the UK.');
+                }
+              }
+            });
+          });
+        }
+      }
+
+      $( document ).ready(function() {
+          $('#locateMe').click(function(){
+            geolocate();
+          });
+      });
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+        async defer></script>
+  </body>
+</html>
