@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>#LoveNotLeave</title>
+    <title>#LoveEU</title>
     <!-- fontawesome-->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
@@ -63,7 +63,7 @@
     </style>
   </head>
   <body>
-      <h1>#LoveNotLeave</h1>
+      <h1>#LoveEU</h1>
       <h2>Download your poster to put in a window and show you love your town, you love the UK, and you love the EU!</h2>
   <input id="userInput" type="text" placeholder="Where are you?" autofocus> <a id="locateMe" href="#"><i class="fas fa-location-arrow"></i></a>
   <div id="result" style="display: none;">
@@ -100,7 +100,7 @@
       function showResult(city){
         $('#userInput').val(city);
         $('#townName').html(city);
-        $('#downloadLink').attr('href', '/posters/'+string_to_slug(city)+'.pdf');
+        $('#downloadLink').attr('href', '/_poster/render.php?'+encodeURIComponent(city));
         $('#result').slideDown();
       }
       function string_to_slug (str) {
@@ -125,7 +125,7 @@
       function geolocate() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=&result_type=postal_town", function( data ) {
+            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyBnWjvoYXOHDRGBRQgIAo84zymZEl6-hOc &result_type=postal_town", function( data ) {
               console.log(data);
               if((!data.results)||(data.results.length<1)){
                 alert("Sorry, we could not locate you.");
@@ -163,7 +163,7 @@
           });
       });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnWjvoYXOHDRGBRQgIAo84zymZEl6-hOc &libraries=places&callback=initMap"
         async defer></script>
   </body>
 </html>
