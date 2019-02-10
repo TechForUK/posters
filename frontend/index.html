@@ -39,7 +39,7 @@
       input {
         font-family: 'Roboto', Arial, Sans;
         font-size: 30px;
-        width: 380px;
+        width: 360px;
         height: 40px;
         padding: 5px;
         border-radius: 4px;
@@ -88,88 +88,95 @@
           types: ['geocode'],
           componentRestrictions: {country: 'gb'}
         };
-
         autocomplete = new google.maps.places.Autocomplete(document.getElementById('userInput'), options);
         autocomplete.setFields(['address_components','geometry']);
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
           console.log(place);
+          processPlace(place);
+        });
+      }
+
+      function processPlace(place){
+        var gotPlace = false;
+        var inuk = false;
+        for (var i = 0; i < place.address_components.length; i++) {
+          for (var j = 0; j < place.address_components[i].types.length; j++) {
+            if ((place.address_components[i].types[j] == 'country')&&(place.address_components[i].short_name == 'GB')){
+              inuk = true;
+            }
+          }
+        }
+        if(!inuk){
+          alert('Sorry, this only works for people in the UK.');
+          return false;
+        }
+        for (var i = 0; i < place.address_components.length; i++) {
+          for (var j = 0; j < place.address_components[i].types.length; j++) {
+            if (place.address_components[i].types[j] == 'postal_town'){
+              showResult(place.address_components[i].long_name);
+              gotPlace = true;
+            }
+          }
+        }
+        if (gotPlace == false){
           for (var i = 0; i < place.address_components.length; i++) {
             for (var j = 0; j < place.address_components[i].types.length; j++) {
-              if (place.address_components[i].types[j] == 'postal_town'){
+              if (place.address_components[i].types[j] == 'locality'){
                 showResult(place.address_components[i].long_name);
+                gotPlace = true;
               }
             }
           }
-        });
+        }
+        if (gotPlace == false){
+          for (var i = 0; i < place.address_components.length; i++) {
+            for (var j = 0; j < place.address_components[i].types.length; j++) {
+              if (place.address_components[i].types[j] == 'administrative_area_level_2'){
+                showResult(place.address_components[i].long_name);
+                gotPlace = true;
+              }
+            }
+          }
+        }
       }
       function showResult(city){
         $('#userInput').val(city);
         $('#townName').html(city);
-        $('#downloadLink').attr('href', '/_poster/render.php?'+encodeURIComponent(city));
+        $('#downloadLink').attr('href', 'https://brexit-231311.appspot.com/'+encodeURIComponent(city)+'.pdf');
         $('#result').slideDown();
-      }
-      function string_to_slug (str) {
-          str = str.replace(/^\s+|\s+$/g, ''); // trim
-          str = str.toLowerCase();
-        
-          // remove accents, swap ñ for n, etc
-          var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-          var to   = "aaaaeeeeiiiioooouuuunc------";
-          for (var i=0, l=from.length ; i<l ; i++) {
-              str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-          }
-
-          str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-              .replace(/\s+/g, '-') // collapse whitespace and replace by -
-              .replace(/-+/g, '-'); // collapse dashes
-
-          return str;
       }
       // Bias the autocomplete object to the user's geographical location,
       // as supplied by the browser's 'navigator.geolocation' object.
       function geolocate() {
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
-            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyBnWjvoYXOHDRGBRQgIAo84zymZEl6-hOc &result_type=postal_town", function( data ) {
+            $.get( "https://maps.googleapis.com/maps/api/geocode/json?latlng="+position.coords.latitude+","+position.coords.longitude+"&key=AIzaSyBB3wZ4G6IoT7PM6ze4lXu50QriGJmSqvg&result_type=postal_town", function( data ) {
               console.log(data);
               if((!data.results)||(data.results.length<1)){
                 alert("Sorry, we could not locate you.");
               } else {
                 var place = data.results[0];
                 console.log(place);
-                var inuk = false;
-                for (var i = 0; i < place.address_components.length; i++) {
-                  for (var j = 0; j < place.address_components[i].types.length; j++) {
-                    if ((place.address_components[i].types[j] == 'country')&&(place.address_components[i].short_name == 'GB')){
-                      inuk = true;
-                    }
-                  }
-                }
-                if(inuk){
-                  for (var i = 0; i < place.address_components.length; i++) {
-                    for (var j = 0; j < place.address_components[i].types.length; j++) {
-                      if (place.address_components[i].types[j] == 'postal_town'){
-                        showResult(place.address_components[i].long_name);
-                      }
-                    }
-                  }
-                } else {
-                  alert('Sorry, this only works for people in the UK.');
-                }
+                processPlace(place);
               }
+              $('#locateMe').html('<i class="fas fa-location-arrow"></i>');
             });
+          }, function(){
+            alert("Sorry, we could not locate you.");
+            $('#locateMe').html('<i class="fas fa-location-arrow"></i>');
           });
         }
       }
-
       $( document ).ready(function() {
-          $('#locateMe').click(function(){
+          $('#locateMe').click(function(e){
+            e.preventDefault();
+            $('#locateMe').html('<i class="fas fa-spinner fa-spin"></i>');
             geolocate();
           });
       });
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnWjvoYXOHDRGBRQgIAo84zymZEl6-hOc &libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3wZ4G6IoT7PM6ze4lXu50QriGJmSqvg&libraries=places&callback=initMap"
         async defer></script>
   </body>
 </html>
