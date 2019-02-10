@@ -15,12 +15,16 @@ if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
 }
 $city = substr($city, 1, -4);
 
+$city = str_replace('-',' - ', $city);
+$isLongName = strlen($city) > 9;
+$templateName = $isLongName ? '/templatebig.pdf' : '/template.pdf';
+
 // initiate FPDI
 $pdf = new Fpdi();
 // add a page
 $pdf->AddPage('L', 'A4');
 // set the source file
-$pdf->setSourceFile(dirname(__FILE__) . '/template.pdf');
+$pdf->setSourceFile(dirname(__FILE__) . $templateName);
 // import page 1
 $tplIdx = $pdf->importPage(1);
 // use the imported page and place it at position 10,10 with a width of 100 mm
@@ -30,8 +34,8 @@ $pdf->useTemplate($tplIdx, 0, 0, 297);
 $pdf->AddFont('PermanentMarker','','PermanentMarker-Regular.php');
 $pdf->SetFont('PermanentMarker', '', 80);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->SetXY(100, 25);
-$pdf->Write(20, urldecode($city));
+$pdf->SetXY(100, 20);
+$pdf->Write(30, urldecode($city));
 
 $pdf->Output('D','LoveEU-poster.pdf');
 ?>
