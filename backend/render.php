@@ -14,6 +14,16 @@ if((strlen($city)<1)||(substr(strtolower($city), -4)!=".pdf")){
 	die();
 }
 $city = substr($city, 1, -4);
+$headers = "accept: */*\r\n" .
+    "Refer: https://bestforbritain.org/\r\n";
+
+$context = [
+    'http' => [
+        'method' => 'GET',
+        'header' => $headers,
+        'content' => http_build_query($data),
+    ]
+];
 $output = file_get_contents("https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=".urlencode($city).",%20UK&inputtype=textquery&fields=name&key=AIzaSyBB3wZ4G6IoT7PM6ze4lXu50QriGJmSqvg");
 
 if(strlen($output)<10){
