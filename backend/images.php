@@ -39,7 +39,8 @@ $pdf->setSourceFile(dirname(__FILE__) . $templateName);
 $tplIdx = $pdf->importPage(1);
 // use the imported page and place it at position 0,0 with a width of 297 mm
 $pdf->useTemplate($tplIdx, 0, 0, 297);
-
+header('Cache-Control: public, max-age='.(60*60*24*14));
+header('Expires: '.gmdate("D, d M Y H:i:s", strtotime("+14 days")) . " GMT");
 // Now write some text above the imported page
 $pdf->AddFont('PermanentMarker','','PermanentMarker-Regular.php');
 $pdf->SetFont('PermanentMarker', '', 80);
@@ -61,6 +62,8 @@ if($filetype == 'png'){
 	header('Content-type: image/png');
 	echo file_get_contents($url, false, $context);
 } else {
-	$pdf->Output('D','LoveEU-poster.pdf');
+	header('Content-type: application/pdf');
+	header('content-disposition: attachment; filename="LoveEU-poster.pdf"');
+	echo $pdf->Output('S');
 }
 ?>
