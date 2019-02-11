@@ -4,5 +4,19 @@ threadsafe: true
 includes:
   - creds.yaml
 handlers:
+- url: /images/.*
+  script: backend/images.php
+- url: /
+  static_files: frontend/redirect.html
+  upload: frontend/redirect.html
+- url: /static/heart.png
+  static_files: frontend/static/heart.png
+  upload: frontend/static/heart.png
+- url: /static/generic.png
+  static_files: frontend/static/generic.png
+  upload: frontend/static/generic.png
+- url: /favicon.ico
+  static_files: frontend/static/favicon.ico
+  upload: frontend/static/favicon.ico
 - url: /.*
-  script: backend/render.php
+  script: backend/specifictown.php

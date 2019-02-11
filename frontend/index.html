@@ -1,7 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>#LoveEU</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98374795-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-98374795-4');
+    </script>
+    <title>#LoveEU ❤️ from Best for Britain</title>
+    <meta name="description" content="Show your love for your town, the UK, and the EU." />
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="#LoveEU ❤️ from Best for Britain">
+    <meta itemprop="description" content="Show your love for your town, the UK, and the EU.">
+    <meta itemprop="image" content="https://loveeu.uk/static/generic.png">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@BestForBritain">
+    <meta name="twitter:title" content="#LoveEU ❤️ from Best for Britain">
+    <meta name="twitter:description" content="Show your love for your town, the UK, and the EU.">
+    <meta name="twitter:creator" content="@BestForBritain">
+    <!-- Twitter summary card with large image must be at least 280x150px -->
+    <meta name="twitter:image:src" content="https://loveeu.uk/static/generic.png">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="#LoveEU ❤️ from Best for Britain" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://loveeu.uk/static/generic.png" />
+    <meta property="og:description" content="Show your love for your town, the UK, and the EU." />
+    <meta property="og:site_name" content="Best For Britain" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/brands.css" integrity="sha384-BKw0P+CQz9xmby+uplDwp82Py8x1xtYPK3ORn/ZSoe6Dk3ETP59WCDnX+fI1XCKK" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/solid.css" integrity="sha384-r/k8YTFqmlOaqRkZuSiE9trsrDXkh07mRaoGBMoDcmA58OHILZPsk29i2BsFng1B" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/fontawesome.css" integrity="sha384-4aon80D8rXCGx9ayDt85LbyUHeMWd3UiBaWliBlJ53yzm9hqN21A+o1pqoyK04h+" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
@@ -19,7 +49,7 @@
       html{
         height: 100%;
         background-position: bottom right;
-        background-image: url('heart.png');
+        background-image: url('/static/heart.png');
         background-repeat: no-repeat;
       } 
       h1, h2 {
@@ -58,6 +88,17 @@
         margin-right: 6px;
         color: red;
       }
+      #social {
+        padding-top: 10px;
+        font-size: 22px;
+        color: gray;
+      }
+      #social i {
+        color: gray;
+      }
+      #social i:hover {
+        color: black;
+      }
       #locateMe {
         margin-left: 6px;
         font-size: 30px;
@@ -67,7 +108,7 @@
         opacity: 1;
       }
       #container {
-        width: 440px;
+        width: 480px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -81,14 +122,20 @@
   <body>
     <div id="container">
       <h1>#LoveEU</h1>
-      <h2>Download your poster and put in your window to show you love your town, you love the UK, and you love the EU!</h2>
+      <h2>Show you love your town, you love the UK, and you love the EU by printing a poster or posting to your profile page!</h2>
       <input id="userInput" type="text" placeholder="Where are you?" autofocus> <a id="locateMe" href="#"><i class="fas fa-location-arrow"></i></a>
       <div id="result" style="display: none;">
-        <a href="#" id="downloadLink"><i class="fas fa-file-pdf"></i> Download Your <span id="townName"></span> Poster Now!</a><br>
+        <a href="#" id="downloadLink"><i class="fas fa-file-pdf"></i> Download Your <span class="townName"></span> Poster Now!</a><br>
+        <div id="social">
+        And Share It With <span class="townName"></span>ers On <a class="share" href="#" target="_blank" id="fbLink"><i class="fab fa-facebook"></i></a> <a class="share" href="#" target="_blank" id="twLink"><i class="fab fa-twitter-square"></i></a> <a class="share" href="#" target="_blank" id="waLink"><i class="fab fa-whatsapp-square"></i></a></div>
       </div>
     </div>
   <script type="text/javascript">
       var autocomplete;
+      $('.share').click(function(e){
+        e.preventDefault();
+        window.open($(this).attr('href'),'Sharing...','width=555,height=400,location=no,menubar=no,toolbar=no');
+      })
       function initMap() {
         var options = {
           types: ['geocode'],
@@ -148,8 +195,11 @@
       }
       function showResult(city){
         $('#userInput').val(city);
-        $('#townName').html(city);
-        $('#downloadLink').attr('href', 'https://brexit-231311.appspot.com/'+encodeURIComponent(city)+'.pdf');
+        $('.townName').html(city);
+        $('#downloadLink').attr('href', 'https://loveeu.uk/images/'+encodeURIComponent(city)+'.pdf');
+        $('#fbLink').attr('href', 'https://www.facebook.com/sharer.php?u=https%3A%2F%2Floveeu.uk%2F'+encodeURIComponent(city));
+        $('#twLink').attr('href', 'https://twitter.com/intent/tweet?url=https%3A%2F%2Floveeu.uk%2F'+encodeURIComponent(city)+'&hashtags=LoveEU&text='+encodeURIComponent(city)+'+%E2%9D%A4%EF%B8%8F+EU');
+        $('#waLink').attr('href', 'https://wa.me/?text=%23LoveEU+https%3A%2F%2Floveeu.uk%2F'+encodeURIComponent(city));
         $('#result').slideDown();
       }
       function geolocate() {
