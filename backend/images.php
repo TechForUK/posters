@@ -4,7 +4,7 @@ use setasign\Fpdi\Fpdi;
 require_once(dirname(__FILE__) . '/libraries/fpdf/fpdf.php'); 
 require_once(dirname(__FILE__) . '/libraries/fpdi/src/autoload.php');
 
-$city = urldecode(urldecode($_SERVER['REQUEST_URI']));
+$city = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 // Basic syntax checking
 if((strlen($city)<14) || (substr(strtolower($city), 0, 8) != "/images/") || 

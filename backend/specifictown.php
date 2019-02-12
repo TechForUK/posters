@@ -1,5 +1,5 @@
 <?php
-$city = urldecode($_SERVER['REQUEST_URI']);
+$city = urldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
 
 // Basic syntax checking
 if((strlen($city)<1)){
