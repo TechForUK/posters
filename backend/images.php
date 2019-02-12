@@ -45,7 +45,7 @@ header('Expires: '.gmdate("D, d M Y H:i:s", strtotime("+14 days")) . " GMT");
 $pdf->AddFont('PermanentMarker','','PermanentMarker-Regular.php');
 $pdf->SetFont('PermanentMarker', '', 80);
 $pdf->SetTextColor(0, 0, 0);
-$pdf->SetXY(100, 20);
+$pdf->SetXY(100, 31);
 $pdf->Write(30, strtoupper($city));
 if($filetype == 'png'){
 	$url = 'http://xeio.com/poster/convert.php';
