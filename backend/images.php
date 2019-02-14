@@ -26,8 +26,13 @@ if(!in_array(strtolower($city), $uktowns)){
 
 // Do formatting
 $city = str_replace('-',' - ', $city);
-$isLongName = strlen($city) > 9;
-$templateName = $isLongName ? '/templatebig.pdf' : '/template.pdf';
+if(strlen($city) > 18) {
+	$templateName = '/template-3line.pdf';
+} else if(strlen($city) > 9) {
+	$templateName = '/template-2line.pdf';
+} else {
+	$templateName = '/template-1line.pdf';
+}
 
 // Initiate FPDI to add name to PDF
 $pdf = new Fpdi();
@@ -63,7 +68,7 @@ if($filetype == 'png'){
 	echo file_get_contents($url, false, $context);
 } else {
 	header('Content-type: application/pdf');
-	header('content-disposition: attachment; filename="LoveEU-poster.pdf"');
+	header('content-disposition: attachment; filename="LoveEU-poster-'.preg_replace('/[^a-z]/i', '-', strtolower($city)).'.pdf"');
 	echo $pdf->Output('S');
 }
 ?>
