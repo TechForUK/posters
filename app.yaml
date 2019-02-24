@@ -11,8 +11,11 @@ handlers:
   static_files: frontend/loveeu/static/generic.png
   upload: frontend/loveeu/static/generic.png
 - url: /static/generic-heymp.png
-  static_files: frontend/loveeu/static/generic-heymp.png
-  upload: frontend/loveeu/static/generic-heymp.png
+  static_files: frontend/heymp/static/generic.png
+  upload: frontend/heymp/static/generic.png
+- url: /static/b4b.png
+  static_files: frontend/b4b.png
+  upload: frontend/b4b.png
 - url: /favicon.ico
   script: backend/favicon.php
 - url: /

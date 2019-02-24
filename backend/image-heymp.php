@@ -76,10 +76,10 @@ $pdf->SetXY(101, 39);
 $pdf->Write(30, strtoupper('HEY '.$firstname));
 // Now write arrow label
 $pdf->AddFont('NanumPenScript','','NanumPenScript-Regular.php');
-$pdf->SetFont('NanumPenScript', '', 24);
+$pdf->SetFont('NanumPenScript', '', 26);
 $pdf->SetTextColor(100, 100, 100);
-$pdf->TextWithRotation(53, 18, $fullname.",", 7);
-$pdf->TextWithRotation(54, 25, "MP for ".$city, 7);
+$pdf->TextWithRotation(54, 21, $fullname.",", 5);
+$pdf->TextWithRotation(55, 29, "MP for ".$city, 5);
 
 // Now add pic of MP
 if(!file_exists(dirname(__FILE__).'/mp-images/'.$image)){

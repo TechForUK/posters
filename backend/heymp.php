@@ -119,7 +119,9 @@ $city = utf8_decode($thismp->constituency_name);
       #mainImage {
       	width: 430px;
       	height: 304px;
-      	box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+      	box-shadow: 0 0 9px rgba(0, 0, 0, 0.4);
+        border: none;
+        border-radius: 6px;
       }
       .actionBtn {
       	font-size: 20px;
@@ -132,24 +134,31 @@ $city = utf8_decode($thismp->constituency_name);
       	text-align: left;
       }
       .actionBtn i {
-      	width: 23px;
+      	width: 26px;
       }
       #elsewhere, #actions {
-      	margin-top: 14px;
+      	margin-top: 24px;
       }
       #elsewhere {
-      	color: gray;
+      	color: #525252;
       }
-      #actionBtnDownload i {
-      	color: red;
+      #actionBtnDownload {
+        color: white;
+        background-color: red;
+        border-color: red;
+      }
+      #actionBtnEmail {
+        background-color: #e5e5e5;
       }
       #actionBtnTwitter {
-      	color: #1da1f2;
+        color: white;
+      	background-color: #1da1f2;
       	border-color: #1da1f2;
       }
       #actionBtnFacebook {
-      	color: #3b5998;
+      	color: white;
       	border-color: #3b5998;
+        background-color: #3b5998;
       }
       #actionBtnFinalsay {
       	color: rgb(72, 72, 72);
@@ -158,24 +167,37 @@ $city = utf8_decode($thismp->constituency_name);
       	color: rgb(237, 80, 81);
       }
       #actionBtnWhatsapp {
-      	color: #075e54;
-      	border-color: #128c7e;
+        color: white;
+      	background-color: rgb(30, 190, 165);
+      	border-color: rgb(30, 190, 165);
       }
       #actionBtnNew {
-      	background-color: gray;
       	border-color: gray;
-      	color: white;
+      	color: #525252;
       }
-      @media only screen and (max-height: 640px) {
-        html {
-          background-position: bottom -100px right 0;
-        }
+      .actionBtn:hover {
+        opacity: 0.8;
+      }
+      #footer {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding-left: 95px;
+        color: #b4b4b4;
+        font-size: 11px;
+        min-height: 31px;
+        padding: 10px 10px 0px 110px;
+        background: url(/static/b4b.png) 10px 10px no-repeat;
+        text-align: left;
+      }
+      #footer a {
+        color: gray;
       }
     </style>
   </head>
   <body>
     <div id="container">
-      <img src="/heyimg/<?php echo $urlname;?>.jpg" id="mainImage">
+      <a href="/heyimg/<?php echo $urlname;?>.pdf"><img src="/heyimg/<?php echo $urlname;?>.jpg" id="mainImage"></a>
       <div id="actions">
 	      <a class="actionBtn" href="/heyimg/<?php echo $urlname;?>.pdf" id="actionBtnDownload"><i class="fas fa-file-pdf"></i> Download &amp; print this as a poster</a><br>
 <?php
@@ -192,8 +214,11 @@ if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
 		</div>
 	  	<div id="elsewhere">
 	  	Not living in <?php echo $thismp->constituency_name; ?>?<br>
-		  <a class="actionBtn" href="/?" id="actionBtnNew"><i class="fas fa-undo-alt"></i> Make one for your own MP now!</a>
+		  <a class="actionBtn" href="/" id="actionBtnNew"><i class="fas fa-undo-alt"></i> Make one for your own MP now</a>
 		</div>
+    </div>
+    <div id="footer">
+      A project by <a href="https://techforuk.com/" target="_blank">Tech For UK</a> for <a href="https://www.bestforbritain.org" target="_blank">Best For Britain</a>, promoted by Eloise Todd on behalf of Best for Britain, the campaign name of UK-EU OPEN POLICY LIMITED registered at International House, 24 Holborn Viaduct, London, EC1A 2BN. MP portrait images used under Creative Commons Attribution 3.0 Unported (CC BY 3.0) <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">license</a>, retrieved from beta.parliament.gov.uk and modified by removal of image background. <a href="https://www.bestforbritain.org/terms_of_use" target="_blank">Terms</a> | <a href="https://www.bestforbritain.org/privacy_policy" target="_blank">Privacy</a> | <a href="https://www.bestforbritain.org/cookies" target="_blank">Cookies</a>
     </div>
   <script type="text/javascript">
       $( document ).ready(function() {

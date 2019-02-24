@@ -1,1 +1,3 @@
 creds.yaml
+backend/mp-images/*.png
+!backend/mp-images/anon.png
