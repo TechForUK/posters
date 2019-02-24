@@ -190,8 +190,8 @@ if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
 		  <a class="actionBtn share" href="https://wa.me/?text=Encourage+<?php echo urlencode($firstname);?>+to+let+us+vote+%F0%9F%99%8B+on+Britain%27s+future+in+Europe%21+https%3A%2F%2Fheymp.uk%2Fhey%2F<?php echo $urlname;?>" id="actionBtnWhatsapp"><i class="fab fa-whatsapp"></i> Share this via Whatsapp</a><br>
 		</div>
 	  	<div id="elsewhere">
-	  	Don't live in <?php echo $thismp->constituency_name; ?>?<br>
-		  <a class="actionBtn" href="/" id="actionBtnNew"><i class="fas fa-undo-alt"></i> Make one for your own MP now!</a>
+	  	Not living in <?php echo $thismp->constituency_name; ?>?<br>
+		  <a class="actionBtn" href="/?" id="actionBtnNew"><i class="fas fa-undo-alt"></i> Make one for your own MP now!</a>
 		</div>
     </div>
   <script type="text/javascript">
