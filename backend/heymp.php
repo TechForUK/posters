@@ -45,7 +45,7 @@ $city = utf8_decode($thismp->constituency_name);
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Hey <?php echo $firstname?>! 🙋 from Best for Britain">
     <meta itemprop="description" content="<?php echo $fullname?> needs to let us vote for Britain's future in Europe.">
-    <meta itemprop="image" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png">
+    <meta itemprop="image" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png?t">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
@@ -54,12 +54,12 @@ $city = utf8_decode($thismp->constituency_name);
     <meta name="twitter:description" content="<?php echo $fullname?> needs to let us vote for Britain's future in Europe.">
     <meta name="twitter:creator" content="@BestForBritain">
     <!-- Twitter summary card with large image must be at least 280x150px -->
-    <meta name="twitter:image:src" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png">
+    <meta name="twitter:image:src" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png?t">
 
     <!-- Open Graph data -->
     <meta property="og:title" content="Hey <?php echo $firstname?>! 🙋 from Best for Britain" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png" />
+    <meta property="og:image" content="https://heymp.uk/heyimg/<?php echo $urlname;?>.png?t" />
     <meta property="og:description" content="<?php echo $fullname?> needs to let us vote for Britain's future in Europe." />
     <meta property="og:site_name" content="Best For Britain" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/brands.css" integrity="sha384-BKw0P+CQz9xmby+uplDwp82Py8x1xtYPK3ORn/ZSoe6Dk3ETP59WCDnX+fI1XCKK" crossorigin="anonymous">
@@ -202,9 +202,9 @@ $city = utf8_decode($thismp->constituency_name);
   </head>
   <body>
     <div id="container">
-      <a href="/heyimg/<?php echo $urlname;?>.pdf"><img src="/heyimg/<?php echo $urlname;?>.jpg" id="mainImage"></a>
+      <a href="/heyimg/<?php echo $urlname;?>.pdf?t"><img src="/heyimg/<?php echo $urlname;?>.jpg?t" id="mainImage"></a>
       <div id="actions">
-	      <a class="actionBtn" href="/heyimg/<?php echo $urlname;?>.pdf" id="actionBtnDownload"><i class="fas fa-file-pdf"></i> Download &amp; print this as a poster</a><br>
+	      <a class="actionBtn" href="/heyimg/<?php echo $urlname;?>.pdf?t" id="actionBtnDownload"><i class="fas fa-file-pdf"></i> Download &amp; print this as a poster</a><br>
 <?php
 if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
 	echo '<a class="actionBtn share" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fheymp.uk%2Fhey%2F'.$urlname.'&hashtags=FBPE%2CHeyMP&text=Hey+%40'.$thismp->member_twitter.'+%F0%9F%99%8B+please+let+us+vote+on+Britain%27s+future+in+Europe%21" id="actionBtnTwitter"><i class="fab fa-twitter"></i> Tweet this to '.$firstname.'</a><br>';
@@ -223,7 +223,7 @@ if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
 		</div>
     </div>
     <div id="footer"><a href="https://www.bestforbritain.org" target="_blank"><img src="/static/b4b.png" alt="Best for Britain"></a><br>
-      A project by <a href="https://techforuk.com/" target="_blank">Tech For UK</a> for <a href="https://www.bestforbritain.org" target="_blank">Best For Britain</a>, promoted by Eloise Todd on behalf of Best for Britain, the campaign name of UK-EU OPEN POLICY LIMITED registered at International House, 24 Holborn Viaduct, London, EC1A 2BN. MP portrait images used under Creative Commons Attribution 3.0 Unported (CC BY 3.0) <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">license</a>, retrieved from beta.parliament.gov.uk and modified by removal of image background. <a href="https://www.bestforbritain.org/terms_of_use" target="_blank">Terms</a> | <a href="https://www.bestforbritain.org/privacy_policy" target="_blank">Privacy</a> | <a href="https://www.bestforbritain.org/cookies" target="_blank">Cookies</a>
+      A project by <a href="https://techforuk.com/" target="_blank">Tech For UK</a> for <a href="https://www.bestforbritain.org" target="_blank">Best For Britain</a>, promoted by Eloise Todd on behalf of Best for Britain, the campaign name of UK-EU OPEN POLICY LIMITED registered at International House, 24 Holborn Viaduct, London, EC1A 2BN. MP portrait images used under Creative Commons Attribution 3.0 Unported (CC BY 3.0) <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">license</a>, retrieved from <a href="https://beta.parliament.uk/" target="_blank">beta.parliament.uk</a> and modified by removal of image background. <a href="https://www.bestforbritain.org/terms_of_use" target="_blank">Terms</a> | <a href="https://www.bestforbritain.org/privacy_policy" target="_blank">Privacy</a> | <a href="https://www.bestforbritain.org/cookies" target="_blank">Cookies</a>
     </div>
   <script type="text/javascript">
       $( document ).ready(function() {
