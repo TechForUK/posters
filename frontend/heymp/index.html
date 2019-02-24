@@ -135,7 +135,7 @@
         $.ajax({url: 'https://api.postcodes.io/postcodes/'+postcode}).done(function(data) {
           $('#locateMe').html('<i class="fas fa-location-arrow"></i>');
           $('#userInput').removeAttr('disabled');
-          window.location.href = '/hey/' + mps[data.result.parliamentary_constituency].toLowerCase().replace(/[^\w-]/g,'-');
+          window.location.href = '/hey/' + mps[data.result.parliamentary_constituency].toLowerCase().replace(/[^a-z]/g,'-');
         });
       }
       $( document ).ready(function() {

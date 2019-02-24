@@ -20,7 +20,7 @@ $urlname = substr($urlname, 8, -4);  // For example, input will be "/heyimg/pers
 $mps = json_decode(file_get_contents(dirname(__FILE__) . '/mp-lookup-data-from-mp-postcards-without-member_name-titles.json'));
 $thismp = null;
 foreach ($mps as $mp){
-	$checkname = preg_replace('/[^\w-]/', '-', strtolower($mp->member_name));
+	$checkname = preg_replace('/[^a-z]/', '-', strtolower(utf8_decode($mp->member_name)));
 	if($checkname == $urlname){
 		$thismp = $mp;
 		break;
@@ -32,9 +32,9 @@ if(is_null($thismp)){
 	die();
 }
 
-list($firstname, $junk) = explode(" ", $thismp->member_name);
-$fullname = $thismp->full_title;
-$city = $thismp->constituency_name;
+list($firstname, $junk) = explode(" ", utf8_decode($thismp->member_name));
+$fullname = utf8_decode($thismp->full_title);
+$city = utf8_decode($thismp->constituency_name);
 $image = strtoupper($thismp->constituency_onscode).'.png';
 
 $templateName = 'template-heymp.pdf';
@@ -77,7 +77,7 @@ $pdf->Write(30, strtoupper('HEY '.$firstname));
 // Now write arrow label
 $pdf->AddFont('NanumPenScript','','NanumPenScript-Regular.php');
 $pdf->SetFont('NanumPenScript', '', 24);
-$pdf->SetTextColor(128, 128, 128);
+$pdf->SetTextColor(100, 100, 100);
 $pdf->TextWithRotation(53, 18, $fullname.",", 7);
 $pdf->TextWithRotation(54, 25, "MP for ".$city, 7);
 

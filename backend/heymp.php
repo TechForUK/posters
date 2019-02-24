@@ -13,7 +13,7 @@ $urlname = substr($urlname, 5);  // For example, input will be "/hey/person-name
 $mps = json_decode(file_get_contents(dirname(__FILE__) . '/mp-lookup-data-from-mp-postcards-without-member_name-titles.json'));
 $thismp = null;
 foreach ($mps as $mp){
-	$checkname = preg_replace('/[^\w-]/', '-', strtolower($mp->member_name));
+	$checkname = preg_replace('/[^a-z]/', '-', strtolower(utf8_decode($mp->member_name)));
 	if($checkname == $urlname){
 		$thismp = $mp;
 		break;
@@ -25,9 +25,9 @@ if(is_null($thismp)){
 	die();
 }
 
-list($firstname, $junk) = explode(" ", $thismp->member_name);
-$fullname = $thismp->full_title;
-$city = $thismp->constituency_name;
+list($firstname, $junk) = explode(" ", utf8_decode($thismp->member_name));
+$fullname = utf8_decode($thismp->full_title);
+$city = utf8_decode($thismp->constituency_name);
 ?>
 <!DOCTYPE html>
 <html>
