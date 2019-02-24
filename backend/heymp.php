@@ -188,7 +188,7 @@ if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
       <a class="actionBtn" href="mailto:<?php echo rawurlencode($thismp->member_email);?>?subject=Hey%20<?php echo rawurlencode($firstname);?>%20%F0%9F%99%8B...&body=Hey%20<?php echo rawurlencode($firstname);?>%2C%20please%20let%20me%20and%20everyone%20else%20in%20<?php echo rawurlencode($thismp->constituency_name);?>%20vote%20on%20Britain%27s%20future%20in%20Europe%21%20Many%20thanks%2C" id="actionBtnEmail"><i class="fas fa-envelope-open-text"></i> Send <?php echo $firstname;?> an email</a><br>
       <a class="actionBtn" href="https://finalsay.app" id="actionBtnFinalsay" target="_blank"><i class="fas fa-phone"></i> Voice message <?php echo $firstname;?> via Finalsay</a><br>
 		  <a class="actionBtn share" href="https://www.facebook.com/sharer.php?u=https%3A%2F%2Fheymp.uk%2Fhey%2F<?php echo $urlname;?>" id="actionBtnFacebook"><i class="fab fa-facebook"></i> Share this via Facebook</a><br>
-      <a class="actionBtn share" href="https://wa.me/?text=Encourage+<?php echo urlencode($firstname);?>+to+let+us+vote+%F0%9F%99%8B+on+Britain%27s+future+in+Europe%21+https%3A%2F%2Fheymp.uk%2Fhey%2F<?php echo $urlname;?>" id="actionBtnWhatsapp"><i class="fab fa-whatsapp"></i> Share this via Whatsapp</a><br>
+      <a class="actionBtn share" href="https://wa.me/?text=Encourage+our+MP+<?php echo urlencode($firstname);?>+to+let+us+vote+%F0%9F%99%8B+on+Britain%27s+future+in+Europe%21+https%3A%2F%2Fheymp.uk%2Fhey%2F<?php echo $urlname;?>" id="actionBtnWhatsapp"><i class="fab fa-whatsapp"></i> Share this via Whatsapp</a><br>
 		</div>
 	  	<div id="elsewhere">
 	  	Not living in <?php echo $thismp->constituency_name; ?>?<br>
