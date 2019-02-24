@@ -179,9 +179,10 @@ $city = utf8_decode($thismp->constituency_name);
         opacity: 0.8;
       }
       #footer {
-        position: absolute;
-        left: 0;
-        bottom: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 120px;
+        width: 330px;
         padding-left: 95px;
         color: #b4b4b4;
         font-size: 11px;
