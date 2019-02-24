@@ -181,15 +181,19 @@ $city = utf8_decode($thismp->constituency_name);
       #footer {
         margin-left: auto;
         margin-right: auto;
-        margin-top: 120px;
+        margin-top: 50px;
         width: 330px;
-        padding-left: 95px;
         color: #b4b4b4;
         font-size: 11px;
-        min-height: 31px;
-        padding: 10px 10px 0px 110px;
-        background: url(/static/b4b.png) 10px 10px no-repeat;
-        text-align: left;
+        padding: 10px;
+        text-align: center;
+      }
+      #footer img {
+        display: inline-block;
+        margin-bottom: 10px;
+        width: 90px;
+        height: 31px;
+        border: none;
       }
       #footer a {
         color: gray;
@@ -218,7 +222,7 @@ if((isset($thismp->member_twitter)) && (strlen($thismp->member_twitter) > 1)){
 		  <a class="actionBtn" href="/" id="actionBtnNew"><i class="fas fa-undo-alt"></i> Make one for your own MP now</a>
 		</div>
     </div>
-    <div id="footer">
+    <div id="footer"><a href="https://www.bestforbritain.org" target="_blank"><img src="/static/b4b.png" alt="Best for Britain"></a><br>
       A project by <a href="https://techforuk.com/" target="_blank">Tech For UK</a> for <a href="https://www.bestforbritain.org" target="_blank">Best For Britain</a>, promoted by Eloise Todd on behalf of Best for Britain, the campaign name of UK-EU OPEN POLICY LIMITED registered at International House, 24 Holborn Viaduct, London, EC1A 2BN. MP portrait images used under Creative Commons Attribution 3.0 Unported (CC BY 3.0) <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank">license</a>, retrieved from beta.parliament.gov.uk and modified by removal of image background. <a href="https://www.bestforbritain.org/terms_of_use" target="_blank">Terms</a> | <a href="https://www.bestforbritain.org/privacy_policy" target="_blank">Privacy</a> | <a href="https://www.bestforbritain.org/cookies" target="_blank">Cookies</a>
     </div>
   <script type="text/javascript">
