@@ -4,19 +4,24 @@ threadsafe: true
 includes:
   - creds.yaml
 handlers:
-- url: /images/.*
-  script: backend/images.php
-- url: /
-  static_files: frontend/redirect.html
-  upload: frontend/redirect.html
-- url: /static/heart.png
-  static_files: frontend/static/heart.png
-  upload: frontend/static/heart.png
+
+- url: /test/
+  script: backend/test.php
 - url: /static/generic.png
-  static_files: frontend/static/generic.png
-  upload: frontend/static/generic.png
+  static_files: frontend/loveeu/static/generic.png
+  upload: frontend/loveeu/static/generic.png
+- url: /static/generic-heymp.png
+  static_files: frontend/loveeu/static/generic-heymp.png
+  upload: frontend/loveeu/static/generic-heymp.png
 - url: /favicon.ico
-  static_files: frontend/static/favicon.ico
-  upload: frontend/static/favicon.ico
+  script: backend/favicon.php
+- url: /
+  script: backend/home.php
+- url: /hey/.*
+  script: backend/heymp.php
+- url: /heyimg/.*
+  script: backend/image-heymp.php
+- url: /images/.*
+  script: backend/image-loveeu.php
 - url: /.*
-  script: backend/specifictown.php
+  script: backend/loveeu.php

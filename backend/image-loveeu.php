@@ -27,11 +27,11 @@ if(!in_array(strtolower($city), $uktowns)){
 // Do formatting
 $city = str_replace('-',' - ', $city);
 if(strlen($city) > 18) {
-	$templateName = '/template-3line.pdf';
+	$templateName = '/template-loveeu-3line.pdf';
 } else if(strlen($city) > 9) {
-	$templateName = '/template-2line.pdf';
+	$templateName = '/template-loveeu-2line.pdf';
 } else {
-	$templateName = '/template-1line.pdf';
+	$templateName = '/template-loveeu-1line.pdf';
 }
 
 // Initiate FPDI to add name to PDF
